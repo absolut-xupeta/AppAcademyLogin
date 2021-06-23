@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_login">AppAcademy Login</string>
+    <string name="app_name">AppAcademy Online</string>
+    <string name="login">Login</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="logoDescription">App Academy logo</string>
+    <string name="candidateInfo">Candidate Info</string>
+</resources>
