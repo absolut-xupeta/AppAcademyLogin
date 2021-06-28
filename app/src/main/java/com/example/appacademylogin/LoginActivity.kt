@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.*
 import com.example.appacademylogin.classes.Candidato
 import com.example.appacademylogin.csv.Csv
+import com.example.appacademylogin.datastructure.MyArrayList
+import com.example.appacademylogin.utils.forEach
 
 const val CANDIDATE = "CANDIDATE"
 
@@ -80,10 +82,10 @@ class LoginActivity : AppCompatActivity() {
     private fun validateLogin(
         username: String,
         password: String,
-        candidates_list: List<Candidato>
+        candidatesList: MyArrayList<Candidato>
     ): Candidato? {
 
-        candidates_list.forEach {
+        candidatesList.forEach {
             if (it.username == username && it.password.toString() == password) {
                 return it
             }

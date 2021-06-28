@@ -6,4 +6,5 @@
     <string name="password">password</string>
     <string name="logoDescription">App Academy logo</string>
     <string name="candidateInfo">Candidate Info</string>
+    <string name="testButton">Tests</string>
 </resources>
