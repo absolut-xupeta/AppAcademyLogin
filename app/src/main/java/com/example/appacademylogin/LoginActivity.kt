@@ -7,10 +7,8 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.*
-import com.example.appacademylogin.classes.Candidato
+import com.example.appacademylogin.classes.Candidate
 import com.example.appacademylogin.csv.Csv
-import com.example.appacademylogin.datastructure.MyArrayList
-import com.example.appacademylogin.utils.forEach
 
 const val CANDIDATE = "CANDIDATE"
 
@@ -24,48 +22,37 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Transform Views to its respective types.
         usernameField = findViewById(R.id.usernameField)
         passwordField = findViewById(R.id.passwordField)
         loginButton = findViewById(R.id.customButton)
         progressBar = findViewById(R.id.loginProgressBar)
 
-        // Get the candidates list.
         val candidates = Csv.getCandidates(this.baseContext)
 
-        // On button click.
         loginButton.setOnClickListener {
-
-            // Set the login button to not clickable.
             changeButtonState(true)
 
-            // Get the result from the credentials.
-            val result: Candidato? = validateLogin(
+            val result: Candidate? = validateLogin(
                 usernameField.text.toString(),
                 passwordField.text.toString(),
                 candidates
             )
 
-            // Go to the next screen if the login credentials are right.
             delay {
                 if (result != null) {
                     Toast.makeText(this, "Logged in successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java).apply {
                         putExtra(
                             CANDIDATE,
-                            "${result.nome}, ${result.idade}, ${result.vaga}, ${result.estado}"
+                            "${result.name}, ${result.age}, ${result.stack}, ${result.state}"
                         )
                     }
 
-                    // Go to the next screen and terminate the login screen.
                     startActivity(intent)
                     finish()
-
                 } else {
-                    // Make button clickable and change color again.
                     changeButtonState(false)
 
-                    // Display failure message.
                     Toast.makeText(
                         this,
                         "Wrong login or password.",
@@ -76,14 +63,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Validate the candidate login credentials.
-     */
     private fun validateLogin(
         username: String,
         password: String,
-        candidatesList: MyArrayList<Candidato>
-    ): Candidato? {
+        candidatesList: ArrayList<Candidate>
+    ): Candidate? {
 
         candidatesList.forEach {
             if (it.username == username && it.password.toString() == password) {
@@ -93,9 +77,6 @@ class LoginActivity : AppCompatActivity() {
         return null
     }
 
-    /**
-     * Delay a function execution.
-     */
     private fun delay(delay: Long = 1500, action: () -> Unit) {
         Handler(Looper.getMainLooper()).postDelayed(action, delay)
     }

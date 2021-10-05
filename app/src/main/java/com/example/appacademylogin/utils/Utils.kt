@@ -5,8 +5,8 @@ object Utils {
     /**
      * Find the percentage of each job by the total number of candidates.
      */
-    fun percentage(vaga: Int, total: Int): Int {
-        return (100 * vaga.toFloat() / total.toFloat()).toInt()
+    fun percentage(stack: Int, total: Int): Int {
+        return (100 * stack.toFloat() / total.toFloat()).toInt()
     }
 
     /**
@@ -27,6 +27,10 @@ object Utils {
      */
     fun getIndex(name: String): Int = name.indexOf(char = ' ')
 
+    /**
+     * Login name is auto-generated, separating spaces and replacing them for underlines
+     * and making the name lowercase like: john_doe
+     */
     fun getLogin(name: String): String {
         return name.replace(oldChar = ' ', newChar = '_').lowercase()
     }
